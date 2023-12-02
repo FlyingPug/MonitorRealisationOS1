@@ -20,8 +20,8 @@ public:
             std::lock_guard<std::mutex> lock(mutex);
             resource = newResource;
             isResourceAvailable = true;
+            condition.notify_one();
         }
-        condition.notify_one();
     }
 
     T getResource() {
